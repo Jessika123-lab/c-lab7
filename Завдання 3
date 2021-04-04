@@ -1,0 +1,51 @@
+using System;
+
+namespace Hangman
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("розмірність матриці: ");
+            int r = Convert.ToInt32(Console.ReadLine());
+
+            int[,] matrix = new int[r, r];
+            Random random = new Random(DateTime.Now.Millisecond);
+
+            for (int i = 0; i < matrix.GetLength(0); i++) 
+            {
+                for (int j = 0; j < matrix.GetLength(1); j++) 
+                {
+                    matrix[i, j] = random.Next(-10, 10);
+                }
+            }
+            int[] b = new int[r];
+            for (int i = 0; i < b.Length; i++)
+            {
+                b[i] = random.Next(-10, 10);
+            }
+
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(1); j++) 
+                {
+
+                    b[j]*=matrix[i, j];
+                }
+            }
+            int[] c = new int[r];
+
+            for (int i = 0; i < r; i++)
+            {
+                int summa = 0;
+                for (int j = 0; j < r; j++)
+                {
+                    summa += b[j];
+                }
+                c[i] = summa;
+            }
+            Console.WriteLine(c);
+
+        }
+    }
+}
